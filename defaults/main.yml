@@ -29,6 +29,7 @@ rocket_chat_node_path: "{{ rocket_chat_node_prefix }}/bin/node"
 rocket_chat_npm_version: 5.6.0
 rocket_chat_npm_path: "{{ rocket_chat_node_prefix }}/bin/npm"
 rocket_chat_npm_dist: /usr/bin/npm
+rocket_chat_manage_hosts: true
 
 # MongoDB settings
 rocket_chat_mongodb_packages: mongodb

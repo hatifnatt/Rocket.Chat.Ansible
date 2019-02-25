@@ -85,7 +85,9 @@
       insertafter: "{{ item.insertafter | default(omit) }}"
       insertbefore: "{{ item.insertbefore | default(omit) }}"
       backrefs: "{{ item.backrefs | default(True) }}"
-    when: ansible_virtualization_type != "docker"
+    when:
+      - ansible_virtualization_type != "docker"
+      - rocket_chat_manage_hosts
     with_items:
       - regexp: '^127\.0\.0\.1(.*){{ ansible_nodename }}(.*)'
         line:   '127.0.0.1 \1 \2'
@@ -94,7 +96,7 @@
       - regexp: '^127\.0\.0\.1[ ]*([^ ].*)[ ]+localhost[ ]+([^ ].*)'
         line:   '127.0.0.1    localhost \1 \2'
       - regexp: '^127\.0\.1\.1'
-        line:   "127.0.1.1    {{ ansible_nodename }} {{ ansible_hostname }}"
+        line:   "127.0.1.1    {{ ansible_fqdn }} {{ ansible_hostname }}"
         insertafter: '^127\.0\.0\.1'
         backrefs: no
     register: hosts_change_result
